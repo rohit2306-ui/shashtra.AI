@@ -1,0 +1,316 @@
+.home-container {
+  background: linear-gradient(135deg, #000000, #001f3f);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-card {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 350px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.home-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-subtitle {
+  /* margin-bottom: 1.5rem; */
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.google-btn {
+  background-color: #4285f4;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.google-btn:hover {
+  background-color: #357ae8;
+}
+
+@media (max-width: 500px) {
+  .home-card {
+    padding: 1.5rem;
+  }
+  .home-title {
+    font-size: 1.5rem;
+  }
+}
+.details-container {
+  background-color: #0b0c10;
+  color: #ffffff;
+  min-height: 100vh;
+  /* padding: 20px; */
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f2833;
+  padding: 5px 30px;
+  border-radius: 8px;
+}
+
+.logout-btn {
+  background-color: #66fcf1;
+  color: #0b0c10;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background-color: #45a29e;
+}
+
+.details-main {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.project-form {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-form label {
+  font-weight: bold;
+  text-align: left;
+}
+
+.project-form input,
+.project-form textarea {
+  padding: 10px;
+  border: 1px solid #45a29e;
+  border-radius: 5px;
+  background-color: #1f2833;
+  color: white;
+}
+
+.project-form input:focus,
+.project-form textarea:focus {
+  outline: none;
+  border-color: #66fcf1;
+}
+
+.next-btn {
+  background-color: #66fcf1;
+  color: #0b0c10;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.next-btn:hover {
+  background-color: #45a29e;
+}
+
+@media (max-width: 600px) {
+  .details-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0a0a0a; /* Black background */
+  color: white;
+}
+
+.student-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #0d1b2a; /* Navy blue */
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
+}
+
+.student-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00b4d8;
+}
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-form input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.student-form input:focus {
+  border: 2px solid #00b4d8;
+}
+
+.student-form button {
+  padding: 12px;
+  background-color: #00b4d8;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.student-form button:hover {
+  background-color: #0096c7;
+}
+
+@media (max-width: 600px) {
+  .student-container {
+    margin: 20px;
+    padding: 15px;
+  }
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0a0a0a;
+  color: white;
+}
+
+.professor-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #0d1b2a; /* Navy blue */
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
+}
+
+.professor-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00b4d8;
+}
+
+.professor-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.professor-form input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.professor-form input:focus {
+  border: 2px solid #00b4d8;
+}
+
+.professor-form button {
+  padding: 12px;
+  background-color: #00b4d8;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.professor-form button:hover {
+  background-color: #0096c7;
+}
+
+@media (max-width: 600px) {
+  .professor-container {
+    margin: 20px;
+    padding: 15px;
+  }
+}
+.report-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #0d1b2a; /* Navy Blue */
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.report-container h1 {
+  text-align: center;
+  color: #00b4d8;
+  margin-bottom: 20px;
+}
+
+.report-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #1b263b;
+  border-radius: 5px;
+}
+
+.report-section h2 {
+  margin-bottom: 10px;
+  color: #90e0ef;
+}
+
+.download-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #00b4d8;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background-color: #0096c7;
+}
+.but:hover{
+  background: linear-gradient(90deg, #0056b3, #0078d7);
+  transform: scale(1.05);
+  
+
+}
