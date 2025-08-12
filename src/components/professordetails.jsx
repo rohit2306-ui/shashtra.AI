@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import "./ProfessorDetails.css";
 
 export default function ProfessorDetails() {
   const navigate = useNavigate();
@@ -24,16 +25,14 @@ export default function ProfessorDetails() {
 
   const handleNext = (e) => {
     e.preventDefault();
-
     for (let key in formData) {
       if (!formData[key].trim()) {
         alert(`Please fill ${key}`);
         return;
       }
     }
-
     saveProjectData({ professorDetails: formData });
-    navigate("/final"); // or /projectreport route
+    navigate("/final");
   };
 
   return (
@@ -43,7 +42,7 @@ export default function ProfessorDetails() {
         <input
           type="text"
           name="name"
-          placeholder="Professor Name"
+          placeholder="Enter professor name"
           value={formData.name}
           onChange={handleChange}
         />
@@ -51,7 +50,7 @@ export default function ProfessorDetails() {
         <input
           type="text"
           name="designation"
-          placeholder="Designation"
+          placeholder="e.g., Associate Professor"
           value={formData.designation}
           onChange={handleChange}
         />
@@ -62,9 +61,10 @@ export default function ProfessorDetails() {
           placeholder="Department"
           value={formData.department}
           onChange={handleChange}
+          style={{ gridColumn: "span 2" }}
         />
 
-        <button type="submit">Generate final report</button>
+        <button type="submit">Generate Final Report</button>
       </form>
     </div>
   );

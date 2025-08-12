@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,24 @@ export default function ProjectDetails() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate("/");
-  };
+  // 🔹 Typing animation state
+  const [typedText, setTypedText] = useState("");
+  const fixedString = "Your AI Project Partner — Helping You Build Smarter Reports ..."; 
+  const typingSpeed = 50; // milliseconds per letter
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < fixedString.length) {
+        setTypedText((prev) => prev + fixedString[index]);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const saveProjectData = (newData) => {
     const existingData = JSON.parse(localStorage.getItem("projectData")) || {};
@@ -30,17 +44,15 @@ export default function ProjectDetails() {
 
   return (
     <div className="details-container">
-      <header className="details-header">
-        <h2>Project Details</h2>
-        <button className="logout-btn" onClick={handleLogout}>Logout</button>
-      </header>
-
       <main className="details-main">
-         <h3 style={{ fontSize: "4rem", fontWeight: "bold", margin: "0 0 10px" }}>
-        Welcome to <span style={{ color: "#39c0e0" }}>शास्त्रAI</span>
-      </h3>
-        {/* <h2>{auth.currentUser?.displayName}</h2> */}
-        {/* <p>{auth.currentUser?.email}</p> */}
+        <h3 style={{ fontSize: "4rem", fontWeight: "bold", margin: "0 0 10px" }}>
+          Welcome to <span style={{ color: "#39c0e0" }}>शास्त्रAI</span>
+        </h3>
+
+        {/* 🔹 Auto Typing Text */}
+        <p style={{ fontSize: "1.2rem", color: "#4a86abff", minHeight: "30px" }}>
+          {typedText}
+        </p>
 
         <form onSubmit={(e) => e.preventDefault()} className="project-form">
           <label>Project Title</label>

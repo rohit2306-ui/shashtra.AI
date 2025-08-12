@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import ProjectDetails from "./components/projectdetails";
 import StudentDetails from "./components/studentdetails";
@@ -6,11 +6,13 @@ import ProfessorDetails from "./components/professordetails";
 import ProjectReport from "./components/projectreport";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ReportEditor from "./components/Reporteditor";
+import Nav from "./components/Nav";
 
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
+    <Nav/>
       <ErrorBoundary>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,6 +25,7 @@ export default function App() {
      
       </Routes>
       </ErrorBoundary>
-    </Router>
+    
+    </BrowserRouter>
   );
 }

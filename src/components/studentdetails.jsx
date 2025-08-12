@@ -10,6 +10,24 @@ export default function StudentDetails() {
     semester: "",
   });
 
+  const branches = [
+    "Computer Science and Engineering",
+    "Information Technology",
+    "Electronics and Communication Engineering",
+    "Electrical Engineering",
+    "Mechanical Engineering",
+    "Civil Engineering",
+    "Chemical Engineering",
+    "Aerospace Engineering",
+    "Biotechnology",
+    "Automobile Engineering",
+    "Metallurgical Engineering",
+    "Production Engineering",
+    "Instrumentation Engineering",
+  ];
+
+  const semesters = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -25,60 +43,94 @@ export default function StudentDetails() {
 
   const handleNext = (e) => {
     e.preventDefault();
-
     for (let key in formData) {
       if (!formData[key].trim()) {
         alert(`Please fill ${key}`);
         return;
       }
     }
-
     saveProjectData({ studentDetails: formData });
     navigate("/professor");
   };
 
   return (
-    <>
-    
     <div className="student-container">
-        
-      <h1>Student Details</h1>
-      <form className="student-form" onSubmit={handleNext}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+      <div className="form-box">
+        <div className="form-header">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png"
+            alt="icon"
+            className="form-icon"
+          />
+          <h1>Student Details</h1>
+        </div>
 
-        <input
-          type="text"
-          name="rollNumber"
-          placeholder="Roll Number"
-          value={formData.rollNumber}
-          onChange={handleChange}
-        />
+        <form onSubmit={handleNext}>
+          {/* Row 1 */}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="e.g., Rohit Dhakre"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </div>
 
-        <input
-          type="text"
-          name="branch"
-          placeholder="Branch"
-          value={formData.branch}
-          onChange={handleChange}
-        />
+            <div className="form-group">
+              <label>Roll Number</label>
+              <input
+                type="text"
+                name="rollNumber"
+                placeholder="e.g., 22CS101"
+                value={formData.rollNumber}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
 
-        <input
-          type="text"
-          name="semester"
-          placeholder="Semester"
-          value={formData.semester}
-          onChange={handleChange}
-        />
+          {/* Row 2 */}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Branch</label>
+              <select
+                name="branch"
+                value={formData.branch}
+                onChange={handleChange}
+              >
+                <option value="">-- Select Branch --</option>
+                {branches.map((branch, idx) => (
+                  <option key={idx} value={branch}>
+                    {branch}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        <button type="submit">Next</button>
-      </form>
+            <div className="form-group">
+              <label>Semester</label>
+              <select
+                name="semester"
+                value={formData.semester}
+                onChange={handleChange}
+              >
+                <option value="">-- Select Semester --</option>
+                {semesters.map((sem, idx) => (
+                  <option key={idx} value={sem}>
+                    {sem}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="form-footer">
+            <button type="submit">Next →</button>
+          </div>
+        </form>
+      </div>
     </div>
-    </>
   );
 }
