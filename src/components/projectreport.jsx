@@ -82,38 +82,128 @@ Write in formal academic style and listen and sun make our porject repot in stan
     }
   };
 
-  const generatePDF = () => {
-    if (!reportContent) {
-      alert(
-        "Report content is empty! Please wait for generation or try again."
-      );
-      return;
-    }
+const generatePDF = () => {
+  if (!reportContent) {
+    alert("Report content is empty! Please wait for generation or try again.");
+    return;
+  }
 
-    const doc = new jsPDF();
+  const doc = new jsPDF();
 
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text(projectData.projectTitle || "Project Report", 105, 20, {
-      align: "center",
-    });
+  // ===== COVER PAGE =====
+  doc.setFont("Times", "bold");
+  doc.setFontSize(14);
+  doc.text("DR. akhilesh das gupta", 105, 20, { align: "center" });
+  doc.text("Institute of professional studies", 105, 28, { align: "center" });
 
-    doc.setFontSize(12);
-    doc.setFont("Helvetica", "normal");
+  doc.setFontSize(16);
+  doc.text('"react js"', 105, 70, { align: "center" });
+  doc.text("Event 1", 105, 78, { align: "center" });
 
-    let y = 40;
-    const lines = doc.splitTextToSize(reportContent, 180);
-    lines.forEach((line) => {
-      if (y > 280) {
+  doc.setFontSize(12);
+  doc.setFont("Times", "normal");
+  doc.text("Subject: coading", 105, 90, { align: "center" });
+  doc.text("Subject Code: 919823", 105, 98, { align: "center" });
+
+  // Table
+  doc.setFont("Times", "bold");
+  doc.rect(45, 110, 120, 8);
+  doc.text("Roll Number", 55, 115);
+  doc.text("USN", 95, 115);
+  doc.text("Name", 135, 115);
+
+  doc.setFont("Times", "normal");
+  doc.rect(45, 118, 120, 8);
+  doc.text("123456789", 55, 123);
+  doc.text("98736482", 95, 123);
+  doc.text("Your name", 135, 123);
+
+  doc.text("Under the guidance of", 105, 140, { align: "center" });
+
+  doc.setFont("Times", "bold");
+  doc.text("dr.pankaj", 105, 148, { align: "center" });
+  doc.setFont("Times", "normal");
+  doc.text("Associate Professor", 105, 156, { align: "center" });
+  doc.text("Dept of Electronics and Communication Engineering", 105, 164, { align: "center" });
+  doc.text("Guru govind singh indraprasth university", 105, 172, { align: "center" });
+
+  doc.setFont("Times", "bold");
+  doc.text("Department of Electronics and Communication Engineering", 105, 190, { align: "center" });
+  doc.text("(2025-2026)", 105, 198, { align: "center" });
+
+  // ===== CONTENT PAGES =====
+  doc.addPage();
+
+  const drawBorder = () => {
+    doc.setDrawColor(0, 0, 0);
+    doc.setLineWidth(0.5);
+    doc.rect(10, 10, 190, 277);
+  };
+
+  let y = 20;
+  drawBorder();
+
+  const paragraphs = reportContent.split("\n");
+
+  paragraphs.forEach((p, index) => {
+    if (!p.trim()) return;
+
+    // === HEADINGS ===
+    if (p.startsWith("### ")) {
+      const title = p.replace("### ", "").trim();
+      const nextPara = paragraphs[index + 1] || "";
+      const nextParaHeight = doc.splitTextToSize(nextPara, 175).length * 6 + 8;
+
+      // Keep heading + first line together
+      if (y + 8 + nextParaHeight > 270) {
         doc.addPage();
         y = 20;
+        drawBorder();
       }
-      doc.text(line, 20, y);
-      y += 8;
-    });
 
-    doc.save(`${projectData.projectTitle || "Project_Report"}.pdf`);
-  };
+      doc.setFont("Times", "bold");
+      doc.setFontSize(14);
+      doc.text(title, 15, y);
+      y += 8;
+
+      doc.setFont("Times", "normal");
+      doc.setFontSize(12);
+    }
+    // === BULLET POINTS ===
+    else if (p.startsWith("•") || p.startsWith("-")) {
+      const bulletText = p.replace(/^[-•]\s*/, "");
+      const splitText = doc.splitTextToSize(bulletText, 170);
+
+      splitText.forEach((line) => {
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+          drawBorder();
+        }
+        doc.circle(14, y - 2, 0.7, "F");
+        doc.text(line, 18, y);
+        y += 6;
+      });
+    }
+    // === NORMAL PARAGRAPHS ===
+    else {
+      const splitText = doc.splitTextToSize(p, 175);
+      splitText.forEach((line) => {
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+          drawBorder();
+        }
+        doc.text(line, 15, y);
+        y += 6;
+      });
+    }
+  });
+
+  doc.save(`${projectData.projectTitle || "Project_Report"}.pdf`);
+};
+
+
 
   const handleEdit = () => {
     localStorage.setItem("generatedReport", reportContent);
@@ -162,18 +252,18 @@ Write in formal academic style and listen and sun make our porject repot in stan
               onClick={generatePDF}
               style={{
                 padding: "12px 24px",
-                background: "linear-gradient(90deg, #000428 0%, #004e92 100%)",
+                background: "linear-gradient(90deg, #987ecdff 0%, #004e92 100%)",
                 border: "none",
                 borderRadius: 5,
                 color: "#fff",
-                fontSize: 16,
+                fontSize: 20,
                 cursor: "pointer",
                 minWidth: 150,
               }}
             >
               Download Final Report PDF
             </button>
-            <button
+            {/* <button
               onClick={handleEdit}
               style={{
                 padding: "12px 24px",
@@ -187,10 +277,10 @@ Write in formal academic style and listen and sun make our porject repot in stan
               }}
             >
               Edit Project Report
-            </button>
+            </button> */}
           </div>
 
-          <div
+          {/* <div
             style={{
               whiteSpace: "pre-wrap",
               background: "#fff",
@@ -206,7 +296,7 @@ Write in formal academic style and listen and sun make our porject repot in stan
             }}
           >
             {reportContent}
-          </div>
+          </div> */}
         </>
       )}
 
